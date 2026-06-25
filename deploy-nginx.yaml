@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-nginx
+  namespace: kiran
+  annotations:
+    kubernetes.io/change-cause: "deployment for nginx from Argocd"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: c2
+        image: kiran2275/task-nginx:latest
+        ports:
+        - containerPort: 80
